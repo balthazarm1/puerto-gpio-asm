@@ -69,17 +69,14 @@ endfun Pin_configura
 
 defun Pin_escribe
     // R0: self, R1: valor
-    push {LR}
-    movs R3,#(1<<16)
-    cbz R1,0f
-    movs R3,#1
-0:
-    ldrd R1,R2,[R0]
-    lsls R3,R2
-    str R3,[R1,#BSRR]
-    pop {PC}
+    ldr R2, [R0, #Pin__puerto]
+    ldr R3,[R0, #Pin__numero]
+    movs R0,#1
+    lsls R0, R3
 
-    //bx lr         ????
+
+    str R0 , [R2 #BRR]
+    bx lr         
 endfun Pin_escribe
 
 defun Pin_lee
