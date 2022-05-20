@@ -39,15 +39,29 @@ endfun Pin_init
 defun Pin_configura
     // R0: self, R1: config 
     push {R4-R6, LR} 
+
+    ands R2, R1, #0xF //aplico mascara a ultimos bits
+    cmp R2, #8 
+    bne 0f
+    push {R0, R1}
+
+    lsrs R1, #4
+    bl Pin_escribe
+
+    pop {R0,R1}
+0:
     ldr R2, [R0, #Pin__puerto] //cargo la direccion del puerto
     ldr R3, [R0, #Pin__numero]
+
+    
 
     cmp R3, #7
     bls 0f            //bhi : mayor que sin signo | si es menor saltara a 0 | bls : menor que
     mov R5, #8
     mov R0, #CRH
-    b 1f
-0:
+    b 1f 
+
+0:  
     mov R5, #0
     mov R0, #CRL
 
@@ -57,6 +71,7 @@ defun Pin_configura
     movs R4, #0xF  //utilizo como mascara
     lsls R4, R3
     bics R6,R4 //uso bitclear para borrar
+    and  R1, #0xF
     lsls R1, R3
     orrs R6, R1
     str R6, [R2, R0]
