@@ -73,9 +73,12 @@ defun Pin_escribe
     ldr R3,[R0, #Pin__numero]
     movs R0,#1
     lsls R0, R3
-
-
+    cbz R1, 0f
+    str R0 , [R2 #BSRR]
+    b 1f
+0:
     str R0 , [R2 #BRR]
+1:
     bx lr         
 endfun Pin_escribe
 
