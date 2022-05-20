@@ -99,14 +99,7 @@ endfun Pin_escribe
 
 defun Pin_lee
     // R0: self
-    ldrd R0,R1,[R0]
-    movs R2,#1
-    lsls R1,R2,R1
-    ldr R2,[R0,#IDR]
-    movs R0,#0
-    tst R2,R1
-    it ne
-    movne R0,#1
+        // ver como me cambia R0 por 1 y cero en test.c
     bx lr
     // R0: valor
 endfun Pin_lee
