@@ -38,17 +38,30 @@ endfun Pin_init
 
 defun Pin_configura
     // R0: self, R1: config 
-    push {R4, LR}
+    push {R4-R6, LR} 
     ldr R2, [R0, #Pin__puerto] //cargo la direccion del puerto
     ldr R3, [R0, #Pin__numero]
-    ldr R0, [R2, #CRL]
-    lsls R3, #2 //logical shift | es una potencia | necesito de otro registo y se utiliza R4 => hago push{R4,LR} pop {R4, PC}
+
+    cmp R3, #7
+    bls 0f            //bhi : mayor que sin signo | si es menor saltara a 0 | bls : menor que
+    mov R5, #8
+    mov R0, #CRH
+    b 1f
+0:
+    mov R5, #0
+    mov R0, #CRL
+
+1:
+    ldr R0, [R2, R0]
+    lsls R3, #2 //logical shift | es una potencia | equivalente al mov con deplazamiento multiplo de 4 | necesito de otro registo y se utiliza R4 => hago push{R4,LR} pop {R4, PC}
     movs R4, #0xF  //utilizo como mascara
     lsls R4, R3
-    bics R0,R4 //uso bitclear para borrar
-    str R2, [R2, #CRL]
+    bics R6,R4 //uso bitclear para borrar
+    lsls R1, R3
+    orrs R6, R1
+    str R6, [R2, R0]
 
-    push {R4, PC}
+    push {R4-R6, PC} 
     bx lr
 endfun Pin_configura
 
