@@ -2,9 +2,9 @@
 #include <timer_systick.h>
 #include <pin_gpio.h>
 
-GPIO_TypeDef miPuerto;
-static Pin miPinH;
-static Pin miPinL;
+GPIO_TypeDef miPuerto; //crea un puero falso
+static Pin miPinH; //se utilizara un pin de 8 a 15
+static Pin miPinL; //y otro pin de 0 a 7
 enum MisConstantes{NUM_PIN_H=13,NUM_PIN_L=5};
 
 void setUp(void)
