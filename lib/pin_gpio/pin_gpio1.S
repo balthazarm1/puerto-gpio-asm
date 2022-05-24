@@ -36,6 +36,9 @@ endfun Pin_init
 
 defun Pin_configura
     // R0: self, R1: config
+    ldr R2,[R0,#Pin__puerto]
+    ldr R0, =0xFF0FFFFF
+    str R0, [R2,#CRL]
     bx lr
 endfun Pin_configura
 
