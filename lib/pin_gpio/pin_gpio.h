@@ -4,7 +4,7 @@
 #include <stdbool.h>
     typedef struct Pin
     {
-        GPIO_TypeDef *puerto;
+        GPIO_TypeDef *puerto; //se puede ver GPIO_TypeDef asocia los registro de configuracion de un puerto
         int numero;
     }Pin;
 
@@ -21,9 +21,9 @@
         PIN_SALIDA_RAPIDO_OD = PIN_SALIDA_RAPIDO  | 0b100,
     } ConfigPin;
     void Pin_init(Pin *self, GPIO_TypeDef *puerto, int numPin);
-    void Pin_configura(Pin *self,ConfigPin modo);
-    void Pin_escribe(Pin *self, bool valor);
-    bool Pin_lee(Pin *self);
+    void Pin_configura(Pin *self,ConfigPin modo); //configuro si es salida o entrada
+    void Pin_escribe(Pin *self, bool valor); //escribo en salida
+    bool Pin_lee(Pin *self); //leo entrada
     bool Pin_leeSalida(Pin *self);
 
 #endif

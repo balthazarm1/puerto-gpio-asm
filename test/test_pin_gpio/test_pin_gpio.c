@@ -2,9 +2,9 @@
 #include <timer_systick.h>
 #include <pin_gpio.h>
 
-GPIO_TypeDef miPuerto;
-static Pin miPinH;
-static Pin miPinL;
+GPIO_TypeDef miPuerto; //crea un puero falso
+static Pin miPinH; //se utilizara un pin de 8 a 15
+static Pin miPinL; //y otro pin de 0 a 7
 enum MisConstantes{NUM_PIN_H=13,NUM_PIN_L=5};
 
 void setUp(void)
@@ -105,6 +105,7 @@ int main(void)
     UNITY_BEGIN();
     RUN_TEST(configura_analogico);
     RUN_TEST(configura_entrada);
+<<<<<<< HEAD
     //RUN_TEST(configura_salida);
     //RUN_TEST(configura_salida_od);
     //RUN_TEST(escribe_en_salida_bajo);
@@ -113,5 +114,15 @@ int main(void)
     //RUN_TEST(configura_entrada_pullDown);
     //RUN_TEST(lee_entrada);
     //RUN_TEST(lee_valor_salida);
+=======
+    RUN_TEST(configura_salida);
+    RUN_TEST(configura_salida_od); // anda hasta aqui lo que se hizo en pin_gpio1
+    RUN_TEST(escribe_en_salida_bajo);
+    RUN_TEST(escribe_en_salida_alto);
+    RUN_TEST(configura_entrada_pullUp);
+    RUN_TEST(configura_entrada_pullDown);
+    RUN_TEST(lee_entrada);
+    RUN_TEST(lee_valor_salida);
+>>>>>>> d9e42a260815d3e486ac9150a451b59f1fb80c1a
     return UNITY_END();   
 }
