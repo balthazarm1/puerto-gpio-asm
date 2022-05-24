@@ -37,83 +37,23 @@ endfun Pin_init
 .set BRR,0x14
 
 defun Pin_configura
-<<<<<<< HEAD
     // R0: self, R1: config
     ldr R2,[R0,#Pin__puerto]
     ldr R0, =0xFF0FFFFF
     str R0, [R2,#CRL]
-=======
-    // R0: self, R1: config 
-    push {R4-R6, LR} 
-
-    ands R2, R1, #0xF //aplico mascara a ultimos bits
-    cmp R2, #8 
-    bne 0f
-    push {R0, R1}
-
-    lsrs R1, #4
-    bl Pin_escribe
-
-    pop {R0,R1}
-0:
-    ldr R2, [R0, #Pin__puerto] //cargo la direccion del puerto
-    ldr R3, [R0, #Pin__numero]
-
-    
-
-    cmp R3, #7
-    bls 0f            //bhi : mayor que sin signo | si es menor saltara a 0 | bls : menor que
-    mov R5, #8
-    mov R0, #CRH
-    b 1f 
-
-0:  
-    mov R5, #0
-    mov R0, #CRL
-
-1:
-    ldr R0, [R2, R0]
-    lsls R3, #2 //logical shift | es una potencia | equivalente al mov con deplazamiento multiplo de 4 | necesito de otro registo y se utiliza R4 => hago push{R4,LR} pop {R4, PC}
-    movs R4, #0xF  //utilizo como mascara
-    lsls R4, R3
-    bics R6,R4 //uso bitclear para borrar
-    and  R1, #0xF
-    lsls R1, R3
-    orrs R6, R1
-    str R6, [R2, R0]
-
-    push {R4-R6, PC} 
->>>>>>> d9e42a260815d3e486ac9150a451b59f1fb80c1a
     bx lr
 endfun Pin_configura
 
 
 
+
 defun Pin_escribe
     // R0: self, R1: valor
-<<<<<<< HEAD
     bx lr
-=======
-    ldr R2, [R0, #Pin__puerto]
-    ldr R3,[R0, #Pin__numero]
-    movs R0,#1
-    lsls R0, R3
-    cbz R1, 0f
-    str R0 , [R2 #BSRR]
-    b 1f
-0:
-    str R0 , [R2 #BRR]
-1:
-    bx lr         
->>>>>>> d9e42a260815d3e486ac9150a451b59f1fb80c1a
 endfun Pin_escribe
 
 defun Pin_lee
     // R0: self
-<<<<<<< HEAD
-=======
-        // ver como me cambia R0 por 1 y cero en test.c
->>>>>>> d9e42a260815d3e486ac9150a451b59f1fb80c1a
     bx lr
     // R0: valor
 endfun Pin_lee
