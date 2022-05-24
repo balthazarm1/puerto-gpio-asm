@@ -104,7 +104,7 @@ int main(void)
     TimerSysTick_esperaMilisegundos(500);
     UNITY_BEGIN();
     RUN_TEST(configura_analogico);
-    //RUN_TEST(configura_entrada);
+    RUN_TEST(configura_entrada);
     //RUN_TEST(configura_salida);
     //RUN_TEST(configura_salida_od);
     //RUN_TEST(escribe_en_salida_bajo);
