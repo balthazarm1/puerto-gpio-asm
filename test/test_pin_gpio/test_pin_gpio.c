@@ -105,8 +105,8 @@ int main(void)
     UNITY_BEGIN();
     RUN_TEST(configura_analogico);
     RUN_TEST(configura_entrada);
-    //RUN_TEST(configura_salida);
-    //RUN_TEST(configura_salida_od);
+    RUN_TEST(configura_salida);
+    RUN_TEST(configura_salida_od);
     //RUN_TEST(escribe_en_salida_bajo);
     //RUN_TEST(escribe_en_salida_alto);
     //RUN_TEST(configura_entrada_pullUp);
