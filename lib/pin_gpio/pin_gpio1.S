@@ -73,6 +73,12 @@ endfun Pin_configura
 
 defun Pin_escribe
     // R0: self, R1: valor
+    ldr R2, [R0, #Pin__puerto]
+    ldr R3, [R0, #Pin__numero]
+    movs R0,#1
+    lsls R0, R3
+    str R0 , [R2, #BRR]
+
     bx lr
 endfun Pin_escribe
 
